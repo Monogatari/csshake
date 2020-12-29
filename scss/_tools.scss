@@ -32,10 +32,10 @@ $trigger: 'shake-trigger' !default;
   $h: 5px, 
   $v: 5px, 
   $r: 3deg, 
-  $dur: 100ms, 
+  $dur: 0.8s, 
   $precision: .02, 
   $opacity: false, 
-  $q: infinite, 
+  $q: 1, 
   $t: ease-in-out, 
   $delay: null,
   $chunk: 100%
@@ -77,10 +77,7 @@ $trigger: 'shake-trigger' !default;
 
   @extend %shake;
 
-  &:hover,
-  .#{$trigger}:hover &,
-  &.#{$prefix}-freeze,
-  &.#{$prefix}-constant {
+  & {
     @if $delay { animation-delay: $delay; }
     animation-name: #{$name};
     animation-duration: $dur;
@@ -88,16 +85,7 @@ $trigger: 'shake-trigger' !default;
     animation-iteration-count: $q;
   }
 
-  &:hover,
-  .#{$trigger}:hover & { @extend %running; }
-
+  &.infinite {
+    animation-iteration-count: infinite;
+  }
 }
-
-.#{$prefix}-freeze,
-.#{$prefix}-constant.#{$prefix}-constant--hover:hover,
-.#{$trigger}:hover .#{$prefix}-constant.#{$prefix}-constant--hover {
-  @extend %paused;
-}
-
-.#{$prefix}-freeze:hover,
-.#{$trigger}:hover .#{$prefix}-freeze { @extend %running; }
